@@ -42,7 +42,7 @@ class _AboutSectionState extends State<AboutSection>
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 80 : (isTablet ? 40 : 20),
-        vertical: 80,
+        vertical: 40,
       ),
       child: FadeTransition(
         opacity: _fadeAnimation,
@@ -76,9 +76,9 @@ class _AboutSectionState extends State<AboutSection>
         Text(
           'About Me',
           style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         Container(
@@ -86,8 +86,11 @@ class _AboutSectionState extends State<AboutSection>
           height: 4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2),
-            gradient: const LinearGradient(
-              colors: [Color(0xFF00D4FF), Color(0xFF9D4EDD)],
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary,
+              ],
             ),
           ),
         ),
@@ -100,53 +103,101 @@ class _AboutSectionState extends State<AboutSection>
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: const Color(0xFF1A1A2E).withValues(alpha: 0.5),
+        color: Theme.of(context).colorScheme.surface,
         border: Border.all(
-          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00D4FF).withValues(alpha: 0.1),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
             blurRadius: 20,
             spreadRadius: 5,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Passionate Flutter Developer',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: const Color(0xFF00D4FF),
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 2,
+                  ),
+                ),
+                child: Icon(
+                  Icons.person,
+                  size: 40,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Mukul Kalambe',
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
+                    Text(
+                      'Flutter Developer & Mobile App Expert',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 20),
           Text(
-            'With over 5+ years of experience in mobile app development, I specialize in creating beautiful, performant, and user-friendly applications using Flutter. My journey in software development has led me to work with various technologies, but Flutter has become my passion.',
+            'Passionate Flutter Developer',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'With over 3+ years of experience in mobile app development, I specialize in creating beautiful, performant, and user-friendly applications using Flutter. My journey in software development has led me to work with various technologies, but Flutter has become my passion.',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Colors.white.withValues(alpha: 0.9),
-              height: 1.6,
-            ),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                  height: 1.6,
+                ),
           ),
           const SizedBox(height: 20),
           Text(
             'I believe in writing clean, maintainable code and creating intuitive user experiences. Whether it\'s a startup looking to build their first mobile app or an enterprise seeking to modernize their mobile presence, I\'m here to bring your vision to life.',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Colors.white.withValues(alpha: 0.9),
-              height: 1.6,
-            ),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                  height: 1.6,
+                ),
           ),
           const SizedBox(height: 30),
           Wrap(
             spacing: 20,
             runSpacing: 10,
             children: [
-              _buildStatCard('50+', 'Projects Completed'),
-              _buildStatCard('5+', 'Years Experience'),
-              _buildStatCard('30+', 'Happy Clients'),
+              _buildStatCard('10+', 'Projects Completed'),
+              _buildStatCard('3+', 'Years Experience'),
+              _buildStatCard('5+', 'Happy Clients'),
             ],
           ),
         ],
@@ -159,9 +210,9 @@ class _AboutSectionState extends State<AboutSection>
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: const Color(0xFF9D4EDD).withValues(alpha: 0.1),
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
         border: Border.all(
-          color: const Color(0xFF9D4EDD).withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
         ),
       ),
       child: Column(
@@ -169,15 +220,16 @@ class _AboutSectionState extends State<AboutSection>
           Text(
             number,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: const Color(0xFF9D4EDD),
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           Text(
             label,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Colors.white.withValues(alpha: 0.8),
-            ),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                ),
           ),
         ],
       ),
@@ -186,26 +238,44 @@ class _AboutSectionState extends State<AboutSection>
 
   Widget _buildSocialLinks() {
     final socialLinks = [
-      {'icon': FontAwesomeIcons.github, 'color': Color(0xFF00D4FF), 'url': 'https://github.com/mukulkalambe'},
-      {'icon': FontAwesomeIcons.linkedin, 'color': Color(0xFF9D4EDD), 'url': 'https://linkedin.com/in/mukulkalambe'},
-      {'icon': FontAwesomeIcons.instagram, 'color': Color(0xFF00FFA3), 'url': 'https://instagram.com/mukulkalambe'},
-      {'icon': FontAwesomeIcons.twitter, 'color': Color(0xFF00D4FF), 'url': 'https://twitter.com/mukulkalambe'},
+      {
+        'icon': FontAwesomeIcons.github,
+        'color': Theme.of(context).colorScheme.primary,
+        'url': 'https://github.com/Mukul-Kalambe'
+      },
+      {
+        'icon': FontAwesomeIcons.linkedin,
+        'color': Theme.of(context).colorScheme.secondary,
+        'url': 'https://www.linkedin.com/in/mukul-kalambe-2322601a6'
+      },
+      {
+        'icon': FontAwesomeIcons.instagram,
+        'color': Theme.of(context).colorScheme.tertiary,
+        'url':
+            'https://www.instagram.com/the_mr.developer?igsh=MWw2aW10M2Y5OTFyeQ=='
+      },
+      {
+        'icon': FontAwesomeIcons.twitter,
+        'color': Theme.of(context).colorScheme.primary,
+        'url': 'https://twitter.com/'
+      },
     ];
 
     return Container(
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: const Color(0xFF1A1A2E).withValues(alpha: 0.5),
+        color: Theme.of(context).colorScheme.surface,
         border: Border.all(
-          color: const Color(0xFF9D4EDD).withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF9D4EDD).withValues(alpha: 0.1),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
             blurRadius: 20,
             spreadRadius: 5,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
@@ -214,19 +284,19 @@ class _AboutSectionState extends State<AboutSection>
           Text(
             'Let\'s Connect',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 30),
           ...socialLinks.map((social) => Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: _buildSocialButton(
-              social['icon'] as IconData,
-              social['color'] as Color,
-              social['url'] as String,
-            ),
-          )),
+                padding: const EdgeInsets.only(bottom: 20),
+                child: _buildSocialButton(
+                  social['icon'] as IconData,
+                  social['color'] as Color,
+                  social['url'] as String,
+                ),
+              )),
         ],
       ),
     );
@@ -241,8 +311,8 @@ class _AboutSectionState extends State<AboutSection>
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: color.withValues(alpha: 0.1),
-          border: Border.all(color: color.withValues(alpha: 0.3)),
+          color: color.withOpacity(0.1),
+          border: Border.all(color: color.withOpacity(0.3)),
         ),
         child: Row(
           children: [
@@ -250,7 +320,7 @@ class _AboutSectionState extends State<AboutSection>
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: color.withValues(alpha: 0.2),
+                color: color.withOpacity(0.2),
               ),
               child: FaIcon(
                 icon,
@@ -263,9 +333,9 @@ class _AboutSectionState extends State<AboutSection>
               child: Text(
                 _getSocialName(icon),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ),
             Icon(

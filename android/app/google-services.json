@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "379764789871",
+    "project_id": "mukulkalambe",
+    "storage_bucket": "mukulkalambe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379764789871:android:0bceb498fc25cc706df39a",
+        "android_client_info": {
+          "package_name": "com.example.myportfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv7WSCxcn29FKSB2Gsj42hDzJWzh0Ag8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

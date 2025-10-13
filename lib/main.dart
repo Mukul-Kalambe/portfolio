@@ -1,8 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myportfolio/portfolio_home_page.dart';
-import 'package:myportfolio/theme.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.web,
+  );
   runApp(const MyApp());
 }
 
@@ -12,12 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mukul Kalambe - Flutter Developer',
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.dark,
-      home: const PortfolioHomePage(),
+      home: PortfolioHomePage(),
     );
   }
 }

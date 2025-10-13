@@ -68,12 +68,12 @@ class _FloatingNavBarState extends State<FloatingNavBar>
 
     if (!_isVisible) return const SizedBox.shrink();
 
-    return SlideTransition(
-      position: _slideAnimation,
-      child: Positioned(
-        bottom: 20,
-        left: isDesktop ? 50 : (isTablet ? 30 : 20),
-        right: isDesktop ? 50 : (isTablet ? 30 : 20),
+    return Positioned(
+      top: 20,
+      left: isDesktop ? 50 : (isTablet ? 30 : 20),
+      right: isDesktop ? 50 : (isTablet ? 30 : 20),
+      child: SlideTransition(
+        position: _slideAnimation,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           decoration: BoxDecoration(
@@ -96,9 +96,7 @@ class _FloatingNavBarState extends State<FloatingNavBar>
               ),
             ],
           ),
-          child: isDesktop
-              ? _buildDesktopNavBar()
-              : _buildMobileNavBar(),
+          child: isDesktop ? _buildDesktopNavBar() : _buildMobileNavBar(),
         ),
       ),
     );
@@ -178,9 +176,7 @@ class _FloatingNavBarState extends State<FloatingNavBar>
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: isSelected
-              ? color.withValues(alpha: 0.2)
-              : Colors.transparent,
+          color: isSelected ? color.withValues(alpha: 0.2) : Colors.transparent,
           border: isSelected
               ? Border.all(color: color.withValues(alpha: 0.5), width: 1)
               : null,

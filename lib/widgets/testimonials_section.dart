@@ -17,36 +17,33 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
     {
       'name': 'Sarah Johnson',
       'role': 'CEO, TechStart Inc.',
-      'message': 'Mukul delivered an exceptional Flutter app that exceeded our expectations. His attention to detail and technical expertise made our project a huge success.',
+      'message':
+          'Mukul delivered an exceptional Flutter app that exceeded our expectations. His attention to detail and technical expertise made our project a huge success.',
       'rating': 5,
-      'image': 'https://images.unsplash.com/photo-1494790108755-2616b612b5c5?w=400&h=400&fit=crop&crop=face',
+      'image':
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
       'color': Color(0xFF00D4FF),
       'experience': '6 months project'
     },
     {
       'name': 'David Chen',
       'role': 'Product Manager, FinanceApp',
-      'message': 'Working with Mukul was a game-changer for our startup. He transformed our complex requirements into a beautiful, intuitive mobile experience.',
+      'message':
+          'Working with Mukul was a game-changer for our startup. He transformed our complex requirements into a beautiful, intuitive mobile experience.',
       'rating': 5,
-      'image': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+      'image':
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
       'color': Color(0xFF9D4EDD),
       'experience': '4 months project'
     },
     {
-      'name': 'Emily Rodriguez',
-      'role': 'Founder, HealthTech Solutions',
-      'message': 'Mukul\'s Flutter development skills are outstanding. He delivered our healthcare app on time and with features that our users absolutely love.',
-      'rating': 5,
-      'image': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-      'color': Color(0xFF00FFA3),
-      'experience': '8 months project'
-    },
-    {
       'name': 'Michael Thompson',
       'role': 'CTO, EduPlatform',
-      'message': 'The e-learning app Mukul built for us has been a tremendous success. His expertise in Flutter and user experience design really shows in the final product.',
+      'message':
+          'The e-learning app Mukul built for us has been a tremendous success. His expertise in Flutter and user experience design really shows in the final product.',
       'rating': 5,
-      'image': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+      'image':
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
       'color': Color(0xFF00D4FF),
       'experience': '5 months project'
     },
@@ -108,9 +105,9 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
       child: Column(
         children: [
           _buildSectionTitle(),
-          const SizedBox(height: 60),
+          const SizedBox(height: 20),
           _buildTestimonialsCarousel(isDesktop, isTablet),
-          const SizedBox(height: 40),
+          const SizedBox(height: 0),
           _buildPageIndicator(),
         ],
       ),
@@ -125,9 +122,9 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
           Text(
             'Client Testimonials',
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 16),
           Container(
@@ -144,9 +141,10 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
           Text(
             'What clients say about working with me',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Colors.white.withValues(alpha: 0.8),
-              fontWeight: FontWeight.w300,
-            ),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  fontWeight: FontWeight.w300,
+                ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -168,7 +166,8 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: _buildTestimonialCard(testimonials[index], isDesktop, isTablet),
+            child:
+                _buildTestimonialCard(testimonials[index], isDesktop, isTablet),
           );
         },
       ),
@@ -176,27 +175,27 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
   }
 
   Widget _buildTestimonialCard(
-      Map<String, dynamic> testimonial,
-      bool isDesktop,
-      bool isTablet,
-      ) {
+    Map<String, dynamic> testimonial,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     final color = testimonial['color'] as Color;
 
     return Container(
       padding: const EdgeInsets.all(40),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
-        color: const Color(0xFF1A1A2E).withValues(alpha: 0.6),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        // color: const Color(0xFF1A1A2E).withValues(alpha: 0.6),
+        // border: Border.all(
+        //   color: color.withValues(alpha: 0.3),
+        //   width: 1,
+        // ),
         boxShadow: [
-          BoxShadow(
-            color: color.withValues(alpha: 0.1),
-            blurRadius: 30,
-            spreadRadius: 10,
-          ),
+          // BoxShadow(
+          //   color: color.withValues(alpha: 0.1),
+          //   blurRadius: 30,
+          //   spreadRadius: 10,
+          // ),
         ],
       ),
       child: Column(
@@ -229,11 +228,11 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
             shape: BoxShape.circle,
             border: Border.all(color: color, width: 3),
             boxShadow: [
-              BoxShadow(
-                color: color.withValues(alpha: 0.4),
-                blurRadius: 20,
-                spreadRadius: 5,
-              ),
+              // BoxShadow(
+              //   color: color.withValues(alpha: 0.4),
+              //   blurRadius: 20,
+              //   spreadRadius: 5,
+              // ),
             ],
           ),
           child: ClipRRect(
@@ -241,13 +240,17 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
             child: Image.network(
               testimonial['image'] as String,
               fit: BoxFit.cover,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(child: CircularProgressIndicator());
+              },
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  color: color.withValues(alpha: 0.2),
-                  child: Icon(
-                    Icons.person,
-                    size: 60,
-                    color: color,
+                  color: Colors.grey[300],
+                  child: const Icon(
+                    Icons.image_not_supported,
+                    size: 50,
+                    color: Colors.grey,
                   ),
                 );
               },
@@ -258,18 +261,18 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
         Text(
           testimonial['name'] as String,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
         Text(
           testimonial['role'] as String,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: color,
-            fontWeight: FontWeight.w500,
-          ),
+                color: color,
+                fontWeight: FontWeight.w500,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 12),
@@ -293,7 +296,8 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
     );
   }
 
-  Widget _buildTestimonialContent(Map<String, dynamic> testimonial, Color color) {
+  Widget _buildTestimonialContent(
+      Map<String, dynamic> testimonial, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -312,11 +316,11 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
               child: Text(
                 testimonial['message'] as String,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white.withValues(alpha: 0.9),
-                  height: 1.6,
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.italic,
-                ),
+                      color: Colors.black.withValues(alpha: 0.9),
+                      height: 1.6,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.italic,
+                    ),
               ),
             ),
           ],
@@ -330,7 +334,7 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
             Row(
               children: List.generate(
                 testimonial['rating'] as int,
-                    (index) => Padding(
+                (index) => Padding(
                   padding: const EdgeInsets.only(right: 4),
                   child: Icon(
                     Icons.star,
@@ -344,9 +348,9 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
             Text(
               '${testimonial['rating']}/5 Stars',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: color,
-                fontWeight: FontWeight.bold,
-              ),
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ],
         ),
@@ -359,7 +363,7 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         testimonials.length,
-            (index) => AnimatedContainer(
+        (index) => AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           margin: const EdgeInsets.symmetric(horizontal: 4),
           width: _currentIndex == index ? 32 : 8,
@@ -368,7 +372,7 @@ class _TestimonialsSectionState extends State<TestimonialsSection>
             borderRadius: BorderRadius.circular(4),
             color: _currentIndex == index
                 ? const Color(0xFF00D4FF)
-                : Colors.white.withValues(alpha: 0.3),
+                : Colors.black.withValues(alpha: 0.3),
           ),
         ),
       ),

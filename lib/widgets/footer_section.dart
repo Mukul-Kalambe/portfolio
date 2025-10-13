@@ -47,10 +47,10 @@ class _FooterSectionState extends State<FooterSection>
           vertical: 60,
         ),
         decoration: BoxDecoration(
-          color: const Color(0xFF0A0A0A),
-          border: const Border(
+          color: Theme.of(context).colorScheme.surface.withOpacity(0.05),
+          border: Border(
             top: BorderSide(
-              color: Color(0xFF00D4FF),
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
               width: 1,
             ),
           ),
@@ -81,18 +81,15 @@ class _FooterSectionState extends State<FooterSection>
                   ],
                 ),
               ] else ...[
-                _buildQuickLinks(),
+                Align(
+                    alignment: Alignment.centerLeft, child: _buildQuickLinks()),
                 const SizedBox(height: 30),
                 _buildSocialSection(),
               ],
             ],
-
-            const SizedBox(height: 40),
-
+            const SizedBox(height: 20),
             _buildDivider(),
-
-            const SizedBox(height: 30),
-
+            const SizedBox(height: 20),
             _buildCopyright(),
           ],
         ),
@@ -107,25 +104,25 @@ class _FooterSectionState extends State<FooterSection>
         Text(
           'Mukul Kalambe',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 12),
         Text(
           'Flutter Developer | Mobile App Expert',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: const Color(0xFF00D4FF),
-            fontWeight: FontWeight.w500,
-          ),
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w500,
+              ),
         ),
         const SizedBox(height: 20),
         Text(
           'Crafting beautiful, high-performance mobile applications that bring ideas to life. Let\'s build something amazing together.',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.white.withValues(alpha: 0.8),
-            height: 1.6,
-          ),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                height: 1.6,
+              ),
         ),
         const SizedBox(height: 24),
         _buildContactInfo(),
@@ -139,20 +136,14 @@ class _FooterSectionState extends State<FooterSection>
       children: [
         _buildContactItem(
           Icons.email,
-          'mukul@example.com',
-              () => _launchURL('mailto:mukul@example.com'),
-        ),
-        const SizedBox(height: 8),
-        _buildContactItem(
-          Icons.phone,
-          '+1 (555) 123-4567',
-              () => _launchURL('tel:+15551234567'),
+          'mkalambeofficial@gmail.com',
+          () => _launchURL('mailto:mkalambeofficial@gmail.com'),
         ),
         const SizedBox(height: 8),
         _buildContactItem(
           Icons.location_on,
-          'Mumbai, India',
-              () {},
+          'Nagpur, Maharashtra, India',
+          () {},
         ),
       ],
     );
@@ -170,14 +161,17 @@ class _FooterSectionState extends State<FooterSection>
             Icon(
               icon,
               size: 16,
-              color: const Color(0xFF9D4EDD),
+              color: Theme.of(context).colorScheme.secondary,
             ),
             const SizedBox(width: 12),
             Text(
               text,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withValues(alpha: 0.8),
-              ),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.7),
+                  ),
             ),
           ],
         ),
@@ -200,39 +194,42 @@ class _FooterSectionState extends State<FooterSection>
         Text(
           'Quick Links',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 20),
         ...links.map((link) => Padding(
-          padding: const EdgeInsets.only(bottom: 12),
-          child: InkWell(
-            onTap: link['action'] as VoidCallback,
-            borderRadius: BorderRadius.circular(8),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.arrow_right,
-                    size: 16,
-                    color: const Color(0xFF00FFA3),
+              padding: const EdgeInsets.only(bottom: 12),
+              child: InkWell(
+                onTap: link['action'] as VoidCallback,
+                borderRadius: BorderRadius.circular(8),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.arrow_right,
+                        size: 16,
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        link['title'] as String,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withOpacity(0.7),
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    link['title'] as String,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white.withValues(alpha: 0.8),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        )),
+            )),
       ],
     );
   }
@@ -242,26 +239,27 @@ class _FooterSectionState extends State<FooterSection>
       {
         'icon': FontAwesomeIcons.github,
         'label': 'GitHub',
-        'url': 'https://github.com/mukulkalambe',
-        'color': Color(0xFF00D4FF),
+        'url': 'https://github.com/Mukul-Kalambe',
+        'color': Theme.of(context).colorScheme.primary,
       },
       {
         'icon': FontAwesomeIcons.linkedin,
         'label': 'LinkedIn',
-        'url': 'https://linkedin.com/in/mukulkalambe',
-        'color': Color(0xFF9D4EDD),
+        'url': 'https://www.linkedin.com/in/mukul-kalambe-2322601a6',
+        'color': Theme.of(context).colorScheme.secondary,
       },
       {
         'icon': FontAwesomeIcons.instagram,
         'label': 'Instagram',
-        'url': 'https://instagram.com/mukulkalambe',
-        'color': Color(0xFF00FFA3),
+        'url':
+            'https://www.instagram.com/the_mr.developer?igsh=MWw2aW10M2Y5OTFyeQ==',
+        'color': Theme.of(context).colorScheme.tertiary,
       },
       {
         'icon': FontAwesomeIcons.twitter,
         'label': 'Twitter',
-        'url': 'https://twitter.com/mukulkalambe',
-        'color': Color(0xFF00D4FF),
+        'url': 'https://twitter.com/',
+        'color': Theme.of(context).colorScheme.primary,
       },
     ];
 
@@ -271,34 +269,37 @@ class _FooterSectionState extends State<FooterSection>
         Text(
           'Follow Me',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 20),
         Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: socialLinks.map((social) => _buildSocialButton(
-            social['icon'] as IconData,
-            social['label'] as String,
-            social['url'] as String,
-            social['color'] as Color,
-          )).toList(),
+          children: socialLinks
+              .map((social) => _buildSocialButton(
+                    social['icon'] as IconData,
+                    social['label'] as String,
+                    social['url'] as String,
+                    social['color'] as Color,
+                  ))
+              .toList(),
         ),
         const SizedBox(height: 30),
         Text(
           'Available for freelance projects',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: const Color(0xFF00FFA3),
-            fontWeight: FontWeight.w600,
-          ),
+                color: Theme.of(context).colorScheme.tertiary,
+                fontWeight: FontWeight.w600,
+              ),
         ),
       ],
     );
   }
 
-  Widget _buildSocialButton(IconData icon, String label, String url, Color color) {
+  Widget _buildSocialButton(
+      IconData icon, String label, String url, Color color) {
     return InkWell(
       onTap: () => _launchURL(url),
       borderRadius: BorderRadius.circular(12),
@@ -306,9 +307,9 @@ class _FooterSectionState extends State<FooterSection>
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: color.withValues(alpha: 0.1),
+          color: color.withOpacity(0.1),
           border: Border.all(
-            color: color.withValues(alpha: 0.3),
+            color: color.withOpacity(0.3),
           ),
         ),
         child: Row(
@@ -341,8 +342,8 @@ class _FooterSectionState extends State<FooterSection>
         gradient: LinearGradient(
           colors: [
             Colors.transparent,
-            const Color(0xFF00D4FF).withValues(alpha: 0.5),
-            const Color(0xFF9D4EDD).withValues(alpha: 0.5),
+            Theme.of(context).colorScheme.primary.withOpacity(0.3),
+            Theme.of(context).colorScheme.secondary.withOpacity(0.3),
             Colors.transparent,
           ],
         ),
@@ -352,34 +353,13 @@ class _FooterSectionState extends State<FooterSection>
 
   Widget _buildCopyright() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           '© 2025 Mukul Kalambe. All rights reserved.',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Colors.white.withValues(alpha: 0.6),
-          ),
-        ),
-        Row(
-          children: [
-            Text(
-              'Made with ',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withValues(alpha: 0.6),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               ),
-            ),
-            Icon(
-              Icons.favorite,
-              size: 14,
-              color: const Color(0xFFFF4081),
-            ),
-            Text(
-              ' in Flutter',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withValues(alpha: 0.6),
-              ),
-            ),
-          ],
         ),
       ],
     );

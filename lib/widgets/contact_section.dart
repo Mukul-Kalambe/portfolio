@@ -32,10 +32,12 @@ class _ContactSectionState extends State<ContactSection>
       vsync: this,
     );
 
-    _inputControllers = List.generate(4, (_) => AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    ));
+    _inputControllers = List.generate(
+        4,
+        (_) => AnimationController(
+              duration: const Duration(milliseconds: 300),
+              vsync: this,
+            ));
 
     _focusNodes = List.generate(4, (_) => FocusNode());
     _textControllers = List.generate(4, (_) => TextEditingController());
@@ -112,9 +114,9 @@ class _ContactSectionState extends State<ContactSection>
           Text(
             'Let\'s Build Something Together',
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -123,8 +125,11 @@ class _ContactSectionState extends State<ContactSection>
             height: 4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
-              gradient: const LinearGradient(
-                colors: [Color(0xFF00D4FF), Color(0xFF00FFA3)],
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.primary,
+                  Theme.of(context).colorScheme.secondary,
+                ],
               ),
             ),
           ),
@@ -132,9 +137,10 @@ class _ContactSectionState extends State<ContactSection>
           Text(
             'Have a project in mind? Let\'s discuss how we can bring your vision to life.',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Colors.white.withValues(alpha: 0.8),
-              fontWeight: FontWeight.w300,
-            ),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  fontWeight: FontWeight.w300,
+                ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -150,16 +156,17 @@ class _ContactSectionState extends State<ContactSection>
         padding: const EdgeInsets.all(40),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: const Color(0xFF1A1A2E).withValues(alpha: 0.6),
+          color: Theme.of(context).colorScheme.surface,
           border: Border.all(
-            color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF00D4FF).withValues(alpha: 0.1),
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
               blurRadius: 25,
               spreadRadius: 5,
+              offset: const Offset(0, 10),
             ),
           ],
         ),
@@ -171,23 +178,21 @@ class _ContactSectionState extends State<ContactSection>
               Text(
                 'Send Message',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 30),
-
               _buildAnimatedTextField(
                 controller: _textControllers[0],
                 focusNode: _focusNodes[0],
                 animationController: _inputControllers[0],
                 label: 'Full Name',
                 icon: Icons.person,
-                validator: (value) => value?.isEmpty ?? true ? 'Please enter your name' : null,
+                validator: (value) =>
+                    value?.isEmpty ?? true ? 'Please enter your name' : null,
               ),
-
               const SizedBox(height: 24),
-
               _buildAnimatedTextField(
                 controller: _textControllers[1],
                 focusNode: _focusNodes[1],
@@ -195,34 +200,31 @@ class _ContactSectionState extends State<ContactSection>
                 label: 'Email Address',
                 icon: Icons.email,
                 keyboardType: TextInputType.emailAddress,
-                validator: (value) => value?.isEmpty ?? true ? 'Please enter your email' : null,
+                validator: (value) =>
+                    value?.isEmpty ?? true ? 'Please enter your email' : null,
               ),
-
               const SizedBox(height: 24),
-
               _buildAnimatedTextField(
                 controller: _textControllers[2],
                 focusNode: _focusNodes[2],
                 animationController: _inputControllers[2],
                 label: 'Subject',
                 icon: Icons.subject,
-                validator: (value) => value?.isEmpty ?? true ? 'Please enter a subject' : null,
+                validator: (value) =>
+                    value?.isEmpty ?? true ? 'Please enter a subject' : null,
               ),
-
               const SizedBox(height: 24),
-
               _buildAnimatedTextField(
                 controller: _textControllers[3],
                 focusNode: _focusNodes[3],
                 animationController: _inputControllers[3],
                 label: 'Message',
                 icon: Icons.message,
-                maxLines: 5,
-                validator: (value) => value?.isEmpty ?? true ? 'Please enter your message' : null,
+                maxLines: 3,
+                validator: (value) =>
+                    value?.isEmpty ?? true ? 'Please enter your message' : null,
               ),
-
               const SizedBox(height: 40),
-
               _buildSubmitButton(),
             ],
           ),
@@ -249,7 +251,10 @@ class _ContactSectionState extends State<ContactSection>
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF00D4FF).withValues(alpha: animationController.value * 0.2),
+                color: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withOpacity(animationController.value * 0.2),
                 blurRadius: 10,
                 spreadRadius: 2,
               ),
@@ -262,43 +267,46 @@ class _ContactSectionState extends State<ContactSection>
             keyboardType: keyboardType,
             validator: validator,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Colors.white,
-            ),
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
             decoration: InputDecoration(
               labelText: label,
               labelStyle: TextStyle(
-                color: const Color(0xFF00D4FF).withValues(alpha: 0.7),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
                 fontWeight: FontWeight.w500,
               ),
               prefixIcon: Icon(
                 icon,
-                color: const Color(0xFF00D4FF),
+                color: Theme.of(context).colorScheme.primary,
               ),
               filled: true,
-              fillColor: const Color(0xFF0A0A0A).withValues(alpha: 0.8),
+              fillColor: Theme.of(context)
+                  .colorScheme
+                  .primaryContainer
+                  .withOpacity(0.1),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(
-                  color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(
-                  color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xFF00D4FF),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
                   width: 2,
                 ),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xFFFF4081),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.error,
                   width: 2,
                 ),
               ),
@@ -314,7 +322,11 @@ class _ContactSectionState extends State<ContactSection>
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: _submitForm,
-        icon: const Icon(Icons.send, size: 20),
+        icon: const Icon(
+          Icons.send,
+          size: 20,
+          color: Colors.white,
+        ),
         label: const Text(
           'Send Message',
           style: TextStyle(
@@ -323,8 +335,8 @@ class _ContactSectionState extends State<ContactSection>
           ),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF00D4FF),
-          foregroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
           padding: const EdgeInsets.symmetric(vertical: 18),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -340,30 +352,24 @@ class _ContactSectionState extends State<ContactSection>
       {
         'icon': FontAwesomeIcons.envelope,
         'title': 'Email',
-        'subtitle': 'mukul@example.com',
-        'action': () => _launchURL('mailto:mukul@example.com'),
-        'color': Color(0xFF00D4FF),
-      },
-      {
-        'icon': FontAwesomeIcons.phone,
-        'title': 'Phone',
-        'subtitle': '+1 (555) 123-4567',
-        'action': () => _launchURL('tel:+15551234567'),
-        'color': Color(0xFF9D4EDD),
+        'subtitle': 'mkalambeofficial@gmail.com',
+        'action': () => _launchURL('mailto:mkalambeofficial@gmail.com'),
+        'color': Theme.of(context).colorScheme.primary,
       },
       {
         'icon': FontAwesomeIcons.locationDot,
         'title': 'Location',
-        'subtitle': 'Mumbai, India',
+        'subtitle': 'Nagpur, Maharashtra, India',
         'action': () {},
-        'color': Color(0xFF00FFA3),
+        'color': Theme.of(context).colorScheme.tertiary,
       },
       {
         'icon': FontAwesomeIcons.linkedin,
         'title': 'LinkedIn',
-        'subtitle': '/in/mukulkalambe',
-        'action': () => _launchURL('https://linkedin.com/in/mukulkalambe'),
-        'color': Color(0xFF00D4FF),
+        'subtitle': '/in/mukul-kalambe',
+        'action': () =>
+            _launchURL('https://www.linkedin.com/in/mukul-kalambe-2322601a6 '),
+        'color': Theme.of(context).colorScheme.primary,
       },
     ];
 
@@ -374,16 +380,17 @@ class _ContactSectionState extends State<ContactSection>
         padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: const Color(0xFF1A1A2E).withValues(alpha: 0.6),
+          color: Theme.of(context).colorScheme.surface,
           border: Border.all(
-            color: const Color(0xFF9D4EDD).withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF9D4EDD).withValues(alpha: 0.1),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
               blurRadius: 25,
               spreadRadius: 5,
+              offset: const Offset(0, 10),
             ),
           ],
         ),
@@ -393,30 +400,32 @@ class _ContactSectionState extends State<ContactSection>
             Text(
               'Get In Touch',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 20),
             Text(
               'Feel free to reach out through any of these channels. I\'m always excited to discuss new opportunities and interesting projects.',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.white.withValues(alpha: 0.8),
-                height: 1.6,
-              ),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.7),
+                    height: 1.6,
+                  ),
             ),
             const SizedBox(height: 30),
-
             ...contactItems.map((item) => Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: _buildContactItem(
-                item['icon'] as IconData,
-                item['title'] as String,
-                item['subtitle'] as String,
-                item['color'] as Color,
-                item['action'] as VoidCallback,
-              ),
-            )),
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: _buildContactItem(
+                    item['icon'] as IconData,
+                    item['title'] as String,
+                    item['subtitle'] as String,
+                    item['color'] as Color,
+                    item['action'] as VoidCallback,
+                  ),
+                )),
           ],
         ),
       ),
@@ -424,12 +433,12 @@ class _ContactSectionState extends State<ContactSection>
   }
 
   Widget _buildContactItem(
-      IconData icon,
-      String title,
-      String subtitle,
-      Color color,
-      VoidCallback onTap,
-      ) {
+    IconData icon,
+    String title,
+    String subtitle,
+    Color color,
+    VoidCallback onTap,
+  ) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
@@ -437,8 +446,8 @@ class _ContactSectionState extends State<ContactSection>
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: color.withValues(alpha: 0.1),
-          border: Border.all(color: color.withValues(alpha: 0.3)),
+          color: color.withOpacity(0.1),
+          border: Border.all(color: color.withOpacity(0.3)),
         ),
         child: Row(
           children: [
@@ -446,7 +455,7 @@ class _ContactSectionState extends State<ContactSection>
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: color.withValues(alpha: 0.2),
+                color: color.withOpacity(0.2),
               ),
               child: FaIcon(
                 icon,
@@ -462,16 +471,17 @@ class _ContactSectionState extends State<ContactSection>
                   Text(
                     title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   Text(
                     subtitle,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: color,
-                      fontWeight: FontWeight.w500,
-                    ),
+                          color: color,
+                          fontWeight: FontWeight.w500,
+                      fontSize: 12
+                        ),
                   ),
                 ],
               ),
@@ -494,17 +504,18 @@ class _ContactSectionState extends State<ContactSection>
         SnackBar(
           content: Row(
             children: [
-              const Icon(Icons.check_circle, color: Color(0xFF00FFA3)),
+              Icon(Icons.check_circle,
+                  color: Theme.of(context).colorScheme.tertiary),
               const SizedBox(width: 12),
               const Text('Message sent successfully!'),
             ],
           ),
-          backgroundColor: const Color(0xFF1A1A2E),
+          backgroundColor: Theme.of(context).colorScheme.surface,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(
-              color: Color(0xFF00FFA3),
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.tertiary,
               width: 1,
             ),
           ),

@@ -39,10 +39,17 @@ class _HeroSectionState extends State<HeroSection>
     final isTablet = size.width > 768 && size.width <= 1024;
 
     return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+          // color: Colors.black,
+          image: DecorationImage(
+              image: AssetImage('assets/img/image2.png'),
+              fit: BoxFit.cover,
+              opacity: 0.09)),
       height: size.height,
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 80 : (isTablet ? 40 : 20),
-        vertical: 40,
+        // vertical: 40,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,8 +67,8 @@ class _HeroSectionState extends State<HeroSection>
             const SizedBox(height: 40),
             _buildTextContent(),
           ],
-          const SizedBox(height: 60),
-          _buildActionButtons(isDesktop),
+          // const SizedBox(height: 60),
+          // _buildActionButtons(isDesktop),
         ],
       ),
     );
@@ -78,12 +85,18 @@ class _HeroSectionState extends State<HeroSection>
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF00D4FF).withValues(alpha: _glowAnimation.value * 0.6),
+                color: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withOpacity(_glowAnimation.value * 0.3),
                 blurRadius: 30,
                 spreadRadius: 10,
               ),
               BoxShadow(
-                color: const Color(0xFF9D4EDD).withValues(alpha: _glowAnimation.value * 0.4),
+                color: Theme.of(context)
+                    .colorScheme
+                    .secondary
+                    .withOpacity(_glowAnimation.value * 0.2),
                 blurRadius: 50,
                 spreadRadius: 15,
               ),
@@ -95,22 +108,25 @@ class _HeroSectionState extends State<HeroSection>
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: const Color(0xFF00D4FF),
+                  color: Colors.grey,
                   width: 3,
                 ),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(137),
-                child: Image.network(
-                  'https://pixabay.com/get/g415016eb6b3335170fbfdc254d66f66d9b28ef78e61fdb0875996e0bcb7ebfcdaf732eca2fac35a228e87cfe929af0fac3e2dccb617f6ac73e68db2663ca8cc0_1280.jpg',
-                  fit: BoxFit.cover,
+                child: Image.asset(
+                  "assets/img/photo.jpeg", fit: BoxFit.cover,
+                  // loadingBuilder: (context, child, loadingProgress) {
+                  //   if (loadingProgress == null) return child;
+                  //   return const Center(child: CircularProgressIndicator());
+                  // },
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      color: const Color(0xFF1A1A2E),
+                      color: Colors.grey[300],
                       child: const Icon(
-                        Icons.person,
-                        size: 100,
-                        color: Color(0xFF00D4FF),
+                        Icons.image_not_supported,
+                        size: 50,
+                        color: Colors.grey,
                       ),
                     );
                   },
@@ -128,20 +144,20 @@ class _HeroSectionState extends State<HeroSection>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Mukul Kalambe',
+          'Mukul R. Kalambe',
           style: Theme.of(context).textTheme.displayLarge?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 56,
-          ),
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
+                fontSize: 56,
+              ),
         ),
         const SizedBox(height: 16),
         Text(
-          'Flutter Developer | Mobile App Expert | Freelancer',
+          'Flutter Developer',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: const Color(0xFF00D4FF),
-            fontWeight: FontWeight.w500,
-          ),
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w500,
+              ),
         ),
         const SizedBox(height: 24),
         SizedBox(
@@ -149,11 +165,27 @@ class _HeroSectionState extends State<HeroSection>
           child: AnimatedTextKit(
             animatedTexts: [
               TypewriterAnimatedText(
-                'Building apps that inspire.',
+                'Building beautiful mobile apps with Flutter.',
                 textStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: const Color(0xFF9D4EDD),
-                  fontWeight: FontWeight.w400,
-                ),
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w400,
+                    ),
+                speed: const Duration(milliseconds: 100),
+              ),
+              TypewriterAnimatedText(
+                'Creating seamless user experiences.',
+                textStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w400,
+                    ),
+                speed: const Duration(milliseconds: 100),
+              ),
+              TypewriterAnimatedText(
+                'Turning ideas into reality.',
+                textStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w400,
+                    ),
                 speed: const Duration(milliseconds: 100),
               ),
             ],
@@ -163,11 +195,11 @@ class _HeroSectionState extends State<HeroSection>
         ),
         const SizedBox(height: 16),
         Text(
-          'We translate your dreams into reality.',
+          'Passionate about creating innovative mobile solutions that make a difference.',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: const Color(0xFF00FFA3),
-            fontWeight: FontWeight.w300,
-          ),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                fontWeight: FontWeight.w300,
+              ),
         ),
       ],
     );
@@ -180,22 +212,28 @@ class _HeroSectionState extends State<HeroSection>
       alignment: WrapAlignment.center,
       children: [
         _buildGlowButton(
+          'View Projects',
+          Theme.of(context).colorScheme.primary,
+          () => _scrollToProjects(),
+        ),
+        _buildGlowButton(
+          'Contact Me',
+          Theme.of(context).colorScheme.secondary,
+          () => _launchURL('mailto:mukul@example.com'),
+        ),
+        _buildGlowButton(
           'Download Resume',
-          const Color(0xFF00D4FF),
-              () => _launchURL('https://example.com/resume.pdf'),
-        ),
-        _buildGlowButton(
-          'Hire Me',
-          const Color(0xFF9D4EDD),
-              () => _launchURL('mailto:mukul@example.com'),
-        ),
-        _buildGlowButton(
-          'Explore Projects',
-          const Color(0xFF00FFA3),
-              () {},
+          Theme.of(context).colorScheme.tertiary,
+          () => _launchURL('https://example.com/resume.pdf'),
         ),
       ],
     );
+  }
+
+  void _scrollToProjects() {
+    // This will be handled by the parent widget's scroll controller
+    // For now, we'll just scroll to a specific offset
+    // In a real implementation, you'd pass a callback from the parent
   }
 
   Widget _buildGlowButton(String text, Color color, VoidCallback onPressed) {
@@ -207,7 +245,7 @@ class _HeroSectionState extends State<HeroSection>
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                color: color.withValues(alpha: _glowAnimation.value * 0.5),
+                color: color.withOpacity(_glowAnimation.value * 0.3),
                 blurRadius: 20,
                 spreadRadius: 2,
               ),
@@ -216,13 +254,14 @@ class _HeroSectionState extends State<HeroSection>
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: color.withValues(alpha: 0.1),
+              backgroundColor: color.withOpacity(0.1),
               foregroundColor: color,
               side: BorderSide(color: color, width: 2),
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
+              elevation: 0,
             ),
             child: Text(
               text,

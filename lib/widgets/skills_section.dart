@@ -8,70 +8,73 @@ class SkillsSection extends StatefulWidget {
 }
 
 class _SkillsSectionState extends State<SkillsSection>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late List<AnimationController> _skillControllers;
   late List<Animation<double>> _skillAnimations;
-
-  final List<Map<String, dynamic>> skills = [
-    {'name': 'Flutter', 'level': 0.95, 'color': Color(0xFF00D4FF)},
-    {'name': 'Dart', 'level': 0.92, 'color': Color(0xFF9D4EDD)},
-    {'name': 'Firebase', 'level': 0.88, 'color': Color(0xFF00FFA3)},
-    {'name': 'REST APIs', 'level': 0.90, 'color': Color(0xFF00D4FF)},
-    {'name': 'Node.js', 'level': 0.75, 'color': Color(0xFF9D4EDD)},
-    {'name': 'UI/UX Design', 'level': 0.85, 'color': Color(0xFF00FFA3)},
-    {'name': 'Git', 'level': 0.87, 'color': Color(0xFF00D4FF)},
-    {'name': 'MySQL', 'level': 0.80, 'color': Color(0xFF9D4EDD)},
-    {'name': 'MongoDB', 'level': 0.78, 'color': Color(0xFF00FFA3)},
-  ];
+  int _hoveredIndex = -1;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
 
-    _skillControllers = skills
-        .map((skill) => AnimationController(
-      duration: const Duration(milliseconds: 1500),
-      vsync: this,
-    ))
-        .toList();
+    _skillAnimations = List.generate(
+      12,
+          (index) => Tween<double>(begin: 0.0, end: 1.0).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Interval((index * 0.08), (index * 0.08) + 0.6,
+              curve: Curves.easeOut),
+        ),
+      ),
+    );
 
-    _skillAnimations = _skillControllers
-        .asMap()
-        .entries
-        .map((entry) => Tween<double>(begin: 0.0, end: skills[entry.key]['level'] as double)
-        .animate(CurvedAnimation(
-      parent: entry.value,
-      curve: Curves.easeOutCubic,
-    )))
-        .toList();
-
-    _startAnimations();
-  }
-
-  void _startAnimations() {
     _controller.forward();
-    for (int i = 0; i < _skillControllers.length; i++) {
-      Future.delayed(Duration(milliseconds: i * 200), () {
-        if (mounted) {
-          _skillControllers[i].forward();
-        }
-      });
-    }
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    for (var controller in _skillControllers) {
-      controller.dispose();
-    }
     super.dispose();
   }
+
+  final List<Map<String, dynamic>> skills = [
+    {'name': 'Flutter', 'level': 95, 'icon': '🚀', 'color': Colors.teal},
+    {'name': 'Dart', 'level': 92, 'icon': '💎', 'color': Colors.blue},
+    {'name': 'Firebase', 'level': 88, 'icon': '🔥', 'color': Colors.orange},
+    {'name': 'REST APIs', 'level': 90, 'icon': '🌐', 'color': Colors.green},
+    {'name': 'UI/UX Design', 'level': 85, 'icon': '🎨', 'color': Colors.purple},
+    {
+      'name': 'State Management',
+      'level': 88,
+      'icon': '⚙️',
+      'color': Colors.indigo
+    },
+    {'name': 'Git & GitHub', 'level': 90, 'icon': '📦', 'color': Colors.brown},
+    {'name': 'Android Studio', 'level': 92, 'icon': '🛠️', 'color': Colors.red},
+    {
+      'name': 'iOS Development',
+      'level': 87,
+      'icon': '🍎',
+      'color': Colors.blueGrey
+    },
+    {'name': 'SQLite', 'level': 85, 'icon': '🗄️', 'color': Colors.grey},
+    {
+      'name': 'Problem Solving',
+      'level': 94,
+      'icon': '🧩',
+      'color': Colors.amber
+    },
+    {
+      'name': 'Team Collaboration',
+      'level': 91,
+      'icon': '👥',
+      'color': Colors.cyan
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -82,198 +85,175 @@ class _SkillsSectionState extends State<SkillsSection>
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 80 : (isTablet ? 40 : 20),
-        vertical: 80,
+        vertical: 40,
       ),
       child: Column(
         children: [
-          _buildSectionTitle(),
+          _buildSectionHeader(),
           const SizedBox(height: 60),
-          _buildSkillsGrid(isDesktop, isTablet),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSectionTitle() {
-    return FadeTransition(
-      opacity: _controller,
-      child: Column(
-        children: [
-          Text(
-            'Skills & Technologies',
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: isDesktop ? 4 : (isTablet ? 3 : 2),
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              childAspectRatio: 1.1,
             ),
-          ),
-          const SizedBox(height: 16),
-          Container(
-            width: 100,
-            height: 4,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-              gradient: const LinearGradient(
-                colors: [Color(0xFF9D4EDD), Color(0xFF00FFA3)],
-              ),
-            ),
+            itemCount: skills.length,
+            itemBuilder: (context, index) {
+              return ScaleTransition(
+                scale: _skillAnimations[index],
+                child: _buildSkillCard(skills[index], index),
+              );
+            },
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSkillsGrid(bool isDesktop, bool isTablet) {
-    final crossAxisCount = isDesktop ? 3 : (isTablet ? 2 : 1);
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        childAspectRatio: isDesktop ? 1.5 : (isTablet ? 1.3 : 2.5),
-      ),
-      itemCount: skills.length,
-      itemBuilder: (context, index) {
-        return _buildSkillCard(index);
-      },
+  Widget _buildSectionHeader() {
+    return Column(
+      children: [
+        Text(
+          'My Skills',
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Container(
+          width: 100,
+          height: 4,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(2),
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary,
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          'Expertise in modern mobile development with cutting-edge technologies',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildSkillCard(int index) {
-    final skill = skills[index];
-    final animation = _skillAnimations[index];
+  Widget _buildSkillCard(Map<String, dynamic> skill, int index) {
+    final isHovered = _hoveredIndex == index;
     final color = skill['color'] as Color;
 
-    return AnimatedBuilder(
-      animation: animation,
-      builder: (context, child) {
-        return Container(
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: const Color(0xFF1A1A2E).withValues(alpha: 0.5),
-            border: Border.all(
-              color: color.withValues(alpha: 0.3),
-              width: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: color.withValues(alpha: 0.1),
-                blurRadius: 20,
-                spreadRadius: 2,
-              ),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hoveredIndex = index),
+      onExit: (_) => setState(() => _hoveredIndex = -1),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: isHovered
+                ? [
+              color.withOpacity(0.15),
+              color.withOpacity(0.05),
+            ]
+                : [
+              Colors.transparent,
+              Colors.transparent,
             ],
           ),
+          border: Border.all(
+            color: isHovered
+                ? color.withOpacity(0.5)
+                : Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            width: 1,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Skill icon/bubble
-              Container(
-                width: 60,
-                height: 60,
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: color.withValues(alpha: 0.2),
-                  border: Border.all(color: color, width: 2),
-                  boxShadow: [
-                    BoxShadow(
-                      color: color.withValues(alpha: 0.4),
-                      blurRadius: 15,
-                      spreadRadius: 2,
-                    ),
-                  ],
+                  color: color.withOpacity(isHovered ? 0.2 : 0.1),
                 ),
-                child: Center(
-                  child: Text(
-                    skill['name'].toString().substring(0, 1),
-                    style: TextStyle(
-                      color: color,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                child: Text(
+                  skill['icon'],
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: color,
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-
-              // Skill name
               Text(
-                skill['name'] as String,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
+                skill['name'],
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
-
-              // Progress bar
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Proficiency',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.7),
+              const SizedBox(height: 12),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Stack(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: isHovered
+                            ? color.withOpacity(0.2)
+                            : Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    FractionallySizedBox(
+                      widthFactor: skill['level'] / 100,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        height: 6,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: isHovered
+                                ? [
+                              color,
+                              color.withOpacity(0.7),
+                            ]
+                                : [
+                              Theme.of(context).colorScheme.primary,
+                              Theme.of(context).colorScheme.secondary,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      Text(
-                        '${(animation.value * 100).round()}%',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: color,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    height: 8,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: Colors.white.withValues(alpha: 0.1),
                     ),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: Colors.white.withValues(alpha: 0.1),
-                          ),
-                        ),
-                        FractionallySizedBox(
-                          widthFactor: animation.value,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              gradient: LinearGradient(
-                                colors: [
-                                  color,
-                                  color.withValues(alpha: 0.7),
-                                ],
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: color.withValues(alpha: 0.5),
-                                  blurRadius: 8,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

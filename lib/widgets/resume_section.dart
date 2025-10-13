@@ -65,7 +65,7 @@ class _ResumeSectionState extends State<ResumeSection>
         Text(
           'Resume',
           style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
