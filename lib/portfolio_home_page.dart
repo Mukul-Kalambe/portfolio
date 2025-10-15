@@ -26,6 +26,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       extendBodyBehindAppBar: true,
+
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(

@@ -16,59 +16,46 @@ class _ProjectsSectionState extends State<ProjectsSection>
 
   final List<Map<String, dynamic>> projects = [
     {
-      'title': 'E-Commerce Flutter App',
-      'description': 'Complete mobile shopping experience with payment integration, user authentication, and admin panel.',
-      'image': 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-      'techStack': ['Flutter', 'Firebase', 'Stripe API', 'Provider'],
-      'liveUrl': 'https://play.google.com/store',
-      'githubUrl': 'https://github.com/mukulkalambe/ecommerce-app',
-      'category': 'Mobile App',
+      "title": "Job Jugad",
+      "description":
+          "A job search platform connecting employers and job seekers with advanced filtering and application tracking.",
+      "image": "assets/img/jobjugad.png",
+      "techStack": ["Flutter", "Firebase", "REST API", "Provider"],
+      "liveUrl":
+          "https://play.google.com/store/apps/details?id=com.eliora.jobportal&pcampaignid=web_share",
+      "githubUrl": "https://github.com/username/job-jugad",
+      "category": "Mobile App"
     },
     {
-      'title': 'Social Media Dashboard',
-      'description': 'Analytics dashboard for social media management with real-time data visualization and reporting.',
-      'image': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-      'techStack': ['Flutter', 'REST API', 'Chart.js', 'SQLite'],
-      'liveUrl': 'https://socialdashboard.example.com',
-      'githubUrl': 'https://github.com/mukulkalambe/social-dashboard',
-      'category': 'Web App',
+      "title": "Washionic",
+      "description":
+          "A laundry service app offering scheduling, payment integration, and real-time order tracking.",
+      "image": "assets/img/washionic.png",
+      "techStack": ["Flutter", "Stripe API", "Firebase", "Google Maps API"],
+      "liveUrl": "https://play.google.com/store",
+      "githubUrl": "https://github.com/username/washionic",
+      "category": "Mobile App"
     },
-    // {
-    //   'title': 'Fitness Tracker App',
-    //   'description': 'Comprehensive fitness tracking with workout plans, nutrition tracking, and progress analytics.',
-    //   'image': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
-    //   'techStack': ['Flutter', 'Firebase', 'Health APIs', 'BLoC'],
-    //   'liveUrl': 'https://play.google.com/store',
-    //   'githubUrl': 'https://github.com/mukulkalambe/fitness-tracker',
-    //   'category': 'Mobile App',
-    // },
-    // {
-    //   'title': 'Restaurant POS System',
-    //   'description': 'Point of sale system for restaurants with inventory management and sales reporting.',
-    //   'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop',
-    //   'techStack': ['Flutter', 'Node.js', 'MongoDB', 'Socket.io'],
-    //   'liveUrl': 'https://restaurant-pos.example.com',
-    //   'githubUrl': 'https://github.com/mukulkalambe/restaurant-pos',
-    //   'category': 'Desktop App',
-    // },
-    // {
-    //   'title': 'Weather Forecast App',
-    //   'description': 'Beautiful weather app with location-based forecasts, detailed analytics, and customizable themes.',
-    //   'image': 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop',
-    //   'techStack': ['Flutter', 'OpenWeather API', 'Riverpod', 'Animations'],
-    //   'liveUrl': 'https://play.google.com/store',
-    //   'githubUrl': 'https://github.com/mukulkalambe/weather-app',
-    //   'category': 'Mobile App',
-    // },
-    // {
-    //   'title': 'Task Management System',
-    //   'description': 'Collaborative task management with team features, project tracking, and productivity analytics.',
-    //   'image': 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
-    //   'techStack': ['Flutter', 'Firebase', 'Real-time DB', 'Notifications'],
-    //   'liveUrl': 'https://taskmanager.example.com',
-    //   'githubUrl': 'https://github.com/mukulkalambe/task-manager',
-    //   'category': 'Web App',
-    // },
+    {
+      "title": "Moms Magic Meal",
+      "description":
+          "A meal planning app with recipe suggestions, grocery lists, and nutritional tracking for home cooking.",
+      "image": "assets/img/mmm.png",
+      "techStack": ["Flutter", "Firebase", "REST API", "SQLite"],
+      "liveUrl": "https://play.google.com/store",
+      "githubUrl": "https://github.com/username/moms-magic-meal",
+      "category": "Mobile App"
+    },
+    {
+      "title": "CRM Portal",
+      "description":
+          "A customer relationship management portal for tracking leads, managing customer data, and automating workflows.",
+      "image": "assets/img/crm.jpeg",
+      "techStack": ["Flutter", "Firebase", "REST API", "Chart.js"],
+      "liveUrl": "https://crmportal.example.com",
+      "githubUrl": "https://github.com/username/crm-portal",
+      "category": "Mobile App"
+    }
   ];
 
   @override
@@ -81,9 +68,9 @@ class _ProjectsSectionState extends State<ProjectsSection>
 
     _projectControllers = projects
         .map((project) => AnimationController(
-      duration: const Duration(milliseconds: 800),
-      vsync: this,
-    ))
+              duration: const Duration(milliseconds: 800),
+              vsync: this,
+            ))
         .toList();
 
     _controller.forward();
@@ -138,9 +125,9 @@ class _ProjectsSectionState extends State<ProjectsSection>
           Text(
             'Featured Projects',
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 16),
           Container(
@@ -160,9 +147,10 @@ class _ProjectsSectionState extends State<ProjectsSection>
           Text(
             'Showcasing innovative solutions and creative implementations',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-              fontWeight: FontWeight.w300,
-            ),
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  fontWeight: FontWeight.w300,
+                ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -192,7 +180,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
   Widget _buildProjectCard(int index) {
     final project = projects[index];
     final controller = _projectControllers[index];
-    
+
     // Use theme colors for consistency
     final colors = [
       Theme.of(context).colorScheme.primary,
@@ -300,10 +288,15 @@ class _ProjectsSectionState extends State<ProjectsSection>
                             children: [
                               Text(
                                 project['title'] as String,
-                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -312,10 +305,16 @@ class _ProjectsSectionState extends State<ProjectsSection>
                               Expanded(
                                 child: Text(
                                   project['description'] as String,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-                                    height: 1.5,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface
+                                            .withOpacity(0.7),
+                                        height: 1.5,
+                                      ),
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -330,23 +329,24 @@ class _ProjectsSectionState extends State<ProjectsSection>
                                 children: (project['techStack'] as List<String>)
                                     .take(3)
                                     .map((tech) => Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: color.withOpacity(0.1),
-                                  ),
-                                  child: Text(
-                                    tech,
-                                    style: TextStyle(
-                                      color: color,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ))
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 4,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: color.withOpacity(0.1),
+                                          ),
+                                          child: Text(
+                                            tech,
+                                            style: TextStyle(
+                                              color: color,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ))
                                     .toList(),
                               ),
 
@@ -359,8 +359,9 @@ class _ProjectsSectionState extends State<ProjectsSection>
                                     child: _buildActionButton(
                                       'Live Demo',
                                       FontAwesomeIcons.externalLinkAlt,
-                                      color,
-                                          () => _launchURL(project['liveUrl'] as String),
+                                      Colors.white,
+                                      () => _launchURL(
+                                          project['liveUrl'] as String),
                                     ),
                                   ),
                                   // const SizedBox(width: 12),
@@ -390,11 +391,11 @@ class _ProjectsSectionState extends State<ProjectsSection>
   }
 
   Widget _buildActionButton(
-      String text,
-      IconData icon,
-      Color color,
-      VoidCallback onPressed,
-      ) {
+    String text,
+    IconData icon,
+    Color color,
+    VoidCallback onPressed,
+  ) {
     return ElevatedButton.icon(
       onPressed: onPressed,
       icon: FaIcon(icon, size: 14, color: color),
@@ -407,7 +408,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
         ),
       ),
       style: ElevatedButton.styleFrom(
-        backgroundColor: color.withOpacity(0.1),
+        backgroundColor: Colors.indigo.withOpacity(0.5),
         side: BorderSide(color: color.withOpacity(0.3)),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(
@@ -459,7 +460,7 @@ class _ProjectModal extends StatelessWidget {
       ),
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: 600,
+          maxWidth: MediaQuery.of(context).size.width,
           minWidth: MediaQuery.of(context).size.width * 0.8,
         ),
         padding: const EdgeInsets.all(30),
@@ -473,30 +474,29 @@ class _ProjectModal extends StatelessWidget {
                   child: Text(
                     project['title'] as String,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontWeight: FontWeight.bold,
-                    ),
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: Icon(Icons.close, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
+                  icon: Icon(Icons.close,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.7)),
                 ),
               ],
             ),
             const SizedBox(height: 20),
-
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                project['image'] as String,
+              child: Image.asset(
+                project['image'].toString(),
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(child: CircularProgressIndicator());
-                },
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     color: Colors.grey[300],
@@ -509,56 +509,51 @@ class _ProjectModal extends StatelessWidget {
                 },
               ),
             ),
-
             const SizedBox(height: 24),
-
             Text(
               project['description'] as String,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-                height: 1.6,
-              ),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.8),
+                    height: 1.6,
+                  ),
             ),
-
             const SizedBox(height: 24),
-
             Text(
               'Technologies Used:',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: color,
-                fontWeight: FontWeight.bold,
-              ),
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
-
             const SizedBox(height: 12),
-
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: (project['techStack'] as List<String>)
                   .map((tech) => Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: color.withOpacity(0.1),
-                  border: Border.all(color: color.withOpacity(0.3)),
-                ),
-                child: Text(
-                  tech,
-                  style: TextStyle(
-                    color: color,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ))
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: color.withOpacity(0.1),
+                          border: Border.all(color: color.withOpacity(0.3)),
+                        ),
+                        child: Text(
+                          tech,
+                          style: TextStyle(
+                            color: color,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ))
                   .toList(),
             ),
-
             const SizedBox(height: 30),
-
             Row(
               children: [
                 Expanded(
@@ -585,7 +580,11 @@ class _ProjectModal extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white.withOpacity(0.1),
                       foregroundColor: Theme.of(context).colorScheme.onSurface,
-                      side: BorderSide(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3)),
+                      side: BorderSide(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.3)),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
